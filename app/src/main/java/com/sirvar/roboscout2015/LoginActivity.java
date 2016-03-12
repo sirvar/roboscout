@@ -2,8 +2,6 @@ package com.sirvar.roboscout2015;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -61,8 +59,9 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Attempts to login to Parse backend
+     *
      * @param email email of user
-     * @param pass password of user
+     * @param pass  password of user
      */
     public void login(final String email, final String pass) {
         // Make sure all fields are filled in
@@ -78,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (parseUser != null) {
                     Toast.makeText(getApplicationContext(), "Successfully logged in.", Toast.LENGTH_SHORT).show();
                     sessionManager.createLoginSession(parseUser.getString("Team"), email);
+                    startActivity(new Intent(getApplicationContext(), TeamListActivity.class));
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to login.", Toast.LENGTH_SHORT).show();

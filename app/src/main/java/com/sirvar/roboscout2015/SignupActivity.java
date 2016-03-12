@@ -2,8 +2,6 @@ package com.sirvar.roboscout2015;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -70,18 +68,25 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    public void signup(final String teamNumber, final String email, String password) {
+    /**
+     * Creates a new user in the Parse backend using the provided credentials
+     *
+     * @param teamNumber the team number to signup to
+     * @param email      the email of the user
+     * @param pass       the password of the user account
+     */
+    public void signup(final String teamNumber, final String email, String pass) {
         // Make sure all fields are filled in
-        if (teamNumber.equals("") || email.equals("") || password.equals("")) {
+        if (teamNumber.equals("") || email.equals("") || pass.equals("")) {
             Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
+
         // Create new ParseUser object to signup with field credentials
         ParseUser user = new ParseUser();
         user.setEmail(email);
         user.setUsername(email);
-        user.setPassword(password);
-
+        user.setPassword(pass);
         user.put("Team", teamNumber);
 
         user.signUpInBackground(new SignUpCallback() {
@@ -95,6 +100,8 @@ public class SignupActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable signed up. Please try again.", Toast.LENGTH_SHORT).show();
+                    password.setText("");
+                    passwordAgain.setText("");
                 }
             }
         });
