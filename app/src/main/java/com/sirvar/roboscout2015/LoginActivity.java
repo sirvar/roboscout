@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
-        // Try to login
+        // Try to login into Parse backend
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Opens signup activity
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +65,13 @@ public class LoginActivity extends AppCompatActivity {
      * @param pass password of user
      */
     public void login(final String email, final String pass) {
+        // Make sure all fields are filled in
         if (email.equals("") || pass.equals("")) {
             Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Login to Parse backend
         ParseUser.logInInBackground(email, pass, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
