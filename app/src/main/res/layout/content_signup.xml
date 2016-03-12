@@ -33,7 +33,7 @@
         android:hint="Team Email" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -54,7 +54,7 @@
         android:layout_below="@+id/tPassword" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Signup"
         android:layout_centerHorizontal="true"
