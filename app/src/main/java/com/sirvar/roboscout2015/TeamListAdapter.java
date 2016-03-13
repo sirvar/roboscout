@@ -15,6 +15,8 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
 
     ArrayList<Team> teams;
 
+    ClickListener clickListener;
+
     public TeamListAdapter(ArrayList<Team> teams) {
         this.teams = teams;
     }
@@ -38,7 +40,15 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
         return teams.size();
     }
 
-    public class TeamViewHolder extends RecyclerView.ViewHolder {
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        public void teamClicked(View v, int position);
+    }
+
+    public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView teamNumber;
         TextView region;
@@ -48,6 +58,13 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
 
             teamNumber = (TextView) itemView.findViewById(R.id.teamNumber);
             region = (TextView) itemView.findViewById(R.id.region);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.teamClicked(v, getAdapterPosition());
         }
     }
 }

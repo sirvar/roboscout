@@ -1,5 +1,6 @@
 package com.sirvar.roboscout2015;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +21,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamListActivity extends AppCompatActivity {
+public class TeamListActivity extends AppCompatActivity implements TeamListAdapter.ClickListener {
 
     SessionManager sessionManager;
 
@@ -45,8 +46,7 @@ public class TeamListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(getApplicationContext(), RecruitActivity.class));
             }
         });
 
@@ -71,6 +71,7 @@ public class TeamListActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.teamList);
         adapter = new TeamListAdapter(teams);
+        adapter.setClickListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
 
@@ -108,4 +109,8 @@ public class TeamListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void teamClicked(View v, int position) {
+        startActivity(new Intent(getApplicationContext(), RecruitActivity.class));
+    }
 }
