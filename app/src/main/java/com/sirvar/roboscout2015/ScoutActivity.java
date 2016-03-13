@@ -141,12 +141,13 @@ public class ScoutActivity extends AppCompatActivity {
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public InfoFragment infoFragment;
+        public AutoFragment autoFragment;
 
         public SectionsPagerAdapter(FragmentManager fm, Team team) {
             super(fm);
 
             infoFragment = new InfoFragment();
-
+            autoFragment = new AutoFragment();
         }
 
         @Override
@@ -157,6 +158,8 @@ public class ScoutActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return infoFragment;
+                case 1:
+                    return autoFragment;
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

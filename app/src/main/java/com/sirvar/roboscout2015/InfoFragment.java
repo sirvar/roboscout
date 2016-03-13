@@ -32,6 +32,7 @@ public class InfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
 
         teamNumber = (EditText) view.findViewById(R.id.teamNumber);
+        region = (EditText) view.findViewById(R.id.region);
 
         // Add team number to toolbar
         teamNumber.addTextChangedListener(new TextWatcher() {

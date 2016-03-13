@@ -1,6 +1,9 @@
 package com.sirvar.roboscout2015;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -83,28 +86,55 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         final ArrayList<Team> oldTeams = new ArrayList<>(teams);
         teams.clear();
 
-        // Query backend
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                // No exception, query successful
-                if (e == null) {
-                    for (ParseObject object : list) {
-                        if (object.getString("Team").equals("")) continue;
-                        Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
-                        teams.add(team);
+        if (isNetworkAvailable()) {
+            // Query backend
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    // No exception, query successful
+                    ParseObject.pinAllInBackground("teamList", list);
+                    if (e == null) {
+                        for (ParseObject object : list) {
+                            if (object.getString("Team").equals("")) continue;
+                            Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
+                            teams.add(team);
+                        }
+                        Toast.makeText(getApplicationContext(), "Successfully updated team list", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Unable to fetch team list, reset list to previous teams
+                        Toast.makeText(getApplicationContext(), "Unable to fetch data.", Toast.LENGTH_SHORT).show();
+                        teams = oldTeams;
                     }
-                    Toast.makeText(getApplicationContext(), "Successfully updated team list", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Unable to fetch team list, reset list to previous teams
-                    Toast.makeText(getApplicationContext(), "Unable to fetch data.", Toast.LENGTH_SHORT).show();
-                    teams = oldTeams;
+                    adapter.notifyDataSetChanged();
+                    refresh.setRefreshing(false);
                 }
-                adapter.notifyDataSetChanged();
-                refresh.setRefreshing(false);
-            }
-        });
+            });
+        } else {
+            // Query backend
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
+            query.fromLocalDatastore().findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    // No exception, query successful
+                    ParseObject.pinAllInBackground("teamList", list);
+                    if (e == null) {
+                        for (ParseObject object : list) {
+                            if (object.getString("Team").equals("")) continue;
+                            Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
+                            teams.add(team);
+                        }
+                        Toast.makeText(getApplicationContext(), "Successfully updated team list", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Unable to fetch team list, reset list to previous teams
+                        Toast.makeText(getApplicationContext(), "Unable to fetch data.", Toast.LENGTH_SHORT).show();
+                        teams = oldTeams;
+                    }
+                    adapter.notifyDataSetChanged();
+                    refresh.setRefreshing(false);
+                }
+            });
+        }
     }
 
     @Override
@@ -114,4 +144,16 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         teamInfo.putParcelable("team", teams.get(position));
         startActivity(new Intent(getApplicationContext(), ScoutActivity.class).putExtras(teamInfo));
     }
+
+    /**
+     * Checks if the device is connected to the Internet
+     * @return connection state
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }
