@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
 public class ScoutActivity extends AppCompatActivity {
 
     /**
@@ -70,7 +72,7 @@ public class ScoutActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).show();
+                save();
             }
         });
 
@@ -97,6 +99,10 @@ public class ScoutActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void save() {
+        
     }
 
     /**
@@ -148,7 +154,12 @@ public class ScoutActivity extends AppCompatActivity {
         public SectionsPagerAdapter(FragmentManager fm, Team team) {
             super(fm);
 
+            Bundle teamInfo = new Bundle();
+            teamInfo.putParcelable("team", team);
+
             infoFragment = new InfoFragment();
+            infoFragment.setArguments(teamInfo);
+
             autoFragment = new AutoFragment();
             teleopFragment = new TeleopFragment();
             drivingFragment = new DrivingFragment();

@@ -19,6 +19,10 @@ public class InfoFragment extends Fragment {
 
     private EditText teamNumber;
     private EditText region;
+    private EditText school;
+    private EditText teamName;
+
+    private Team team;
 
     public InfoFragment() {
 
@@ -31,8 +35,17 @@ public class InfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
 
+        team = getArguments().getParcelable("team");
+
         teamNumber = (EditText) view.findViewById(R.id.teamNumber);
         region = (EditText) view.findViewById(R.id.region);
+        school = (EditText) view.findViewById(R.id.school);
+        teamName = (EditText) view.findViewById(R.id.teamName);
+
+        teamNumber.setText(team.getTeamNumber());
+        region.setText(team.getRegion());
+        school.setText(team.getSchool());
+        teamName.setText(team.getTeamName());
 
         // Add team number to toolbar
         teamNumber.addTextChangedListener(new TextWatcher() {
@@ -59,4 +72,19 @@ public class InfoFragment extends Fragment {
         return view;
     }
 
+    public String getTeamNumber() {
+        return teamNumber.getText().toString();
+    }
+
+    public String getRegion() {
+        return region.getText().toString();
+    }
+
+    public String getSchool() {
+        return school.getText().toString();
+    }
+
+    public String getTeamName() {
+        return teamName.getText().toString();
+    }
 }

@@ -36,6 +36,14 @@
         android:hint="School"
         android:layout_below="@+id/region" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords|text"
+        android:ems="10"
+        android:id="@+id/teamName"
+        android:hint="Team Name"
+        android:layout_below="@+id/school" />
 
 
 
