@@ -15,7 +15,7 @@ public class RedirectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_redirect);
+        setContentView(R.layout.activity_scout);
 
         try {
             Parse.enableLocalDatastore(this);

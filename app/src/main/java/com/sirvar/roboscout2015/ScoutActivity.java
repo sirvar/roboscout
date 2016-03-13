@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-public class RecruitActivity extends AppCompatActivity {
+public class ScoutActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -36,15 +36,24 @@ public class RecruitActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private Team team;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recruit);
+        setContentView(R.layout.activity_scout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        try {
+            team = getIntent().getExtras().getParcelable("team");
+            getSupportActionBar().setTitle("Scouting Team " + team.getTeamNumber());
+        } catch (NullPointerException npe) {
+            team = new Team();
+        }
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -119,7 +128,7 @@ public class RecruitActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_recruit, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_scout, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;

@@ -3,13 +3,11 @@ package com.sirvar.roboscout2015;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,7 +44,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RecruitActivity.class));
+                startActivity(new Intent(getApplicationContext(), ScoutActivity.class));
             }
         });
 
@@ -111,6 +109,9 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
 
     @Override
     public void teamClicked(View v, int position) {
-        startActivity(new Intent(getApplicationContext(), RecruitActivity.class));
+        // Attach Parcelable to edit team
+        Bundle teamInfo = new Bundle();
+        teamInfo.putParcelable("team", teams.get(position));
+        startActivity(new Intent(getApplicationContext(), ScoutActivity.class).putExtras(teamInfo));
     }
 }

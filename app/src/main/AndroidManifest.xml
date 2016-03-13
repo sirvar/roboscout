@@ -34,7 +34,7 @@
             android:label="@string/title_activity_team_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RecruitActivity"
+            android:name=".ScoutActivity"
             android:label="@string/title_activity_recruit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
