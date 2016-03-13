@@ -142,12 +142,16 @@ public class ScoutActivity extends AppCompatActivity {
 
         public InfoFragment infoFragment;
         public AutoFragment autoFragment;
+        public TeleopFragment teleopFragment;
+        public DrivingFragment drivingFragment;
 
         public SectionsPagerAdapter(FragmentManager fm, Team team) {
             super(fm);
 
             infoFragment = new InfoFragment();
             autoFragment = new AutoFragment();
+            teleopFragment = new TeleopFragment();
+            drivingFragment = new DrivingFragment();
         }
 
         @Override
@@ -160,6 +164,10 @@ public class ScoutActivity extends AppCompatActivity {
                     return infoFragment;
                 case 1:
                     return autoFragment;
+                case 2:
+                    return teleopFragment;
+                case 3:
+                    return drivingFragment;
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

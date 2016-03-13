@@ -117,7 +117,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                 @Override
                 public void done(List<ParseObject> list, ParseException e) {
                     // No exception, query successful
-                    ParseObject.pinAllInBackground("teamList", list);
+                    ParseObject.pinAllInBackground(list);
                     if (e == null) {
                         for (ParseObject object : list) {
                             if (object.getString("Team").equals("")) continue;

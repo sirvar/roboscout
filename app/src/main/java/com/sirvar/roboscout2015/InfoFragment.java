@@ -17,8 +17,8 @@ import android.widget.EditText;
  */
 public class InfoFragment extends Fragment {
 
-    EditText teamNumber;
-    EditText region;
+    private EditText teamNumber;
+    private EditText region;
 
     public InfoFragment() {
 
