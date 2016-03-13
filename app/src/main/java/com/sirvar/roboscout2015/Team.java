@@ -10,6 +10,15 @@ public class Team implements Parcelable {
     private String school;
     private String teamName;
 
+    private String robotType;
+    private String mainStratedgy;
+    private String sponsors;
+    private String programmingDivision;
+    private String mechaincalDivision;
+    private String electricalDivision;
+    private String mediaDivision;
+    private String workWellWithUs;
+    private String otherInfo;
 
     private String uID;
 
@@ -54,9 +63,46 @@ public class Team implements Parcelable {
         return teamName;
     }
 
+    public String getRobotType() {
+        return robotType;
+    }
+
+    public String getMainStratedgy() {
+        return mainStratedgy;
+    }
+
+    public String getSponsors() {
+        return sponsors;
+    }
+
+    public String getProgrammingDivision() {
+        return programmingDivision;
+    }
+
+    public String getMechaincalDivision() {
+        return mechaincalDivision;
+    }
+
+    public String getElectricalDivision() {
+        return electricalDivision;
+    }
+
+    public String getMediaDivision() {
+        return mediaDivision;
+    }
+
+    public String getWorkWellWithUs() {
+        return workWellWithUs;
+    }
+
+    public String getOtherInfo() {
+        return otherInfo;
+    }
+
     public String getuID() {
         return uID;
     }
+
 
     public void setTeamNumber(String teamNumber) {
         this.teamNumber = teamNumber;
@@ -72,6 +118,42 @@ public class Team implements Parcelable {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public void setRobotType(String robotType) {
+        this.robotType = robotType;
+    }
+
+    public void setMainStratedgy(String mainStratedgy) {
+        this.mainStratedgy = mainStratedgy;
+    }
+
+    public void setSponsors(String sponsors) {
+        this.sponsors = sponsors;
+    }
+
+    public void setProgrammingDivision(String programmingDivision) {
+        this.programmingDivision = programmingDivision;
+    }
+
+    public void setMechaincalDivision(String mechaincalDivision) {
+        this.mechaincalDivision = mechaincalDivision;
+    }
+
+    public void setElectricalDivision(String electricalDivision) {
+        this.electricalDivision = electricalDivision;
+    }
+
+    public void setMediaDivision(String mediaDivision) {
+        this.mediaDivision = mediaDivision;
+    }
+
+    public void setWorkWellWithUs(String workWellWithUs) {
+        this.workWellWithUs = workWellWithUs;
+    }
+
+    public void setOtherInfo(String otherInfo) {
+        this.otherInfo = otherInfo;
     }
 
     public void setuID(String uID) {

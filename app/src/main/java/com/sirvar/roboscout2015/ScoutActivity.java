@@ -57,7 +57,7 @@ public class ScoutActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), team);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -142,9 +142,11 @@ public class ScoutActivity extends AppCompatActivity {
 
         public InfoFragment infoFragment;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm, Team team) {
             super(fm);
+
             infoFragment = new InfoFragment();
+
         }
 
         @Override

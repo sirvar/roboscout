@@ -55,7 +55,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         email = sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL);
 
         // Set title to team number
-        getSupportActionBar().setTitle("Team " + teamNumber);
+        getSupportActionBar().setTitle("RoboScout: Team " + teamNumber);
 
         updateTeamList();
 
