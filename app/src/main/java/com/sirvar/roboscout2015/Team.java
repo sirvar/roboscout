@@ -25,6 +25,7 @@ public class Team implements Parcelable {
         this.uID = uID;
     }
 
+    // Parcelable constructor
     public Team(Parcel in) {
         String[] parcel = new String[5];
 
@@ -56,6 +57,28 @@ public class Team implements Parcelable {
     public String getuID() {
         return uID;
     }
+
+    public void setTeamNumber(String teamNumber) {
+        this.teamNumber = teamNumber;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
+    }
+
+    // Implementing methods for Parcelable
 
     @Override
     public int describeContents() {

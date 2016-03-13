@@ -70,8 +70,7 @@ public class ScoutActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -81,7 +80,7 @@ public class ScoutActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_recruit, menu);
+//        getMenuInflater().inflate(R.menu.menu_recruit, menu);
         return true;
     }
 
@@ -141,20 +140,29 @@ public class ScoutActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        public InfoFragment infoFragment;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            infoFragment = new InfoFragment();
         }
 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+            // Return proper fragment instance based on position
+            switch (position) {
+                case 0:
+                    return infoFragment;
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 4 total pages.
             return 4;
         }
 
