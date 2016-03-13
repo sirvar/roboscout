@@ -30,12 +30,12 @@
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RecruitActivity"
-            android:label="@string/title_activity_recruit"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".TeamListActivity"
             android:label="@string/title_activity_team_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecruitActivity"
+            android:label="@string/title_activity_recruit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
