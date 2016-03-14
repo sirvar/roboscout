@@ -19,7 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 public class ScoutActivity extends AppCompatActivity {
 
@@ -32,6 +34,8 @@ public class ScoutActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
+    private SessionManager sessionManager;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -49,6 +53,8 @@ public class ScoutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         try {
             team = getIntent().getExtras().getParcelable("team");
@@ -101,8 +107,31 @@ public class ScoutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Saves the data to Parse and local datastore if unable to save online
+     */
     public void save() {
-        
+        InfoFragment info = mSectionsPagerAdapter.infoFragment;
+        AutoFragment auto = mSectionsPagerAdapter.autoFragment;
+        TeleopFragment teleop = mSectionsPagerAdapter.teleopFragment;
+        DrivingFragment driving = mSectionsPagerAdapter.drivingFragment;
+
+        ParseObject teamParse;
+
+        if (team.getuID() == null) {
+            teamParse = new ParseObject("T" + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM));
+        } else {
+            teamParse = ParseObject.createWithoutData("T" + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM), team.getuID());
+        }
+
+        teamParse.put("Team", info.getTeamNumber());
+        teamParse.put("Region", info.getRegion());
+        teamParse.put("School", info.getSchool());
+        teamParse.put("TeamName", info.getTeamName());
+
+        teamParse.saveEventually();
+        finish();
+
     }
 
     /**

@@ -11,15 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class TeamListActivity extends AppCompatActivity implements TeamListAdapter.ClickListener {
@@ -29,7 +33,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
     String teamNumber;
     String email;
 
-    ArrayList<Team> teams = new ArrayList<>();
+    ArrayList<Team> teams;
 
     RecyclerView recyclerView;
     TeamListAdapter adapter;
@@ -50,6 +54,8 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                 startActivity(new Intent(getApplicationContext(), ScoutActivity.class));
             }
         });
+
+        teams = new ArrayList<>();
 
         sessionManager = new SessionManager(getApplicationContext());
 
@@ -82,25 +88,29 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
      * Updates the team list by querying the Parse database.
      */
     public void updateTeamList() {
-        // Clear teams and save copy in case fetching doesn't work
+        // Save copy in case fetching doesn't work
         final ArrayList<Team> oldTeams = new ArrayList<>(teams);
-        teams.clear();
 
         if (isNetworkAvailable()) {
             // Query backend
             ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
-                public void done(List<ParseObject> list, ParseException e) {
+                public void done(final List<ParseObject> list, ParseException e) {
                     // No exception, query successful
-                    ParseObject.pinAllInBackground("teamList", list);
+                    ParseObject.unpinAllInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            ParseObject.pinAllInBackground(list);
+                        }
+                    });
+                    teams.clear();
                     if (e == null) {
                         for (ParseObject object : list) {
                             if (object.getString("Team").equals("")) continue;
                             Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
                             teams.add(team);
                         }
-                        Toast.makeText(getApplicationContext(), "Successfully updated team list", Toast.LENGTH_SHORT).show();
                     } else {
                         // Unable to fetch team list, reset list to previous teams
                         Toast.makeText(getApplicationContext(), "Unable to fetch data.", Toast.LENGTH_SHORT).show();
@@ -117,14 +127,14 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                 @Override
                 public void done(List<ParseObject> list, ParseException e) {
                     // No exception, query successful
-                    ParseObject.pinAllInBackground(list);
+                    teams.clear();
                     if (e == null) {
+                        Collections.reverse(list);
                         for (ParseObject object : list) {
                             if (object.getString("Team").equals("")) continue;
                             Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
                             teams.add(team);
                         }
-                        Toast.makeText(getApplicationContext(), "Successfully updated team list", Toast.LENGTH_SHORT).show();
                     } else {
                         // Unable to fetch team list, reset list to previous teams
                         Toast.makeText(getApplicationContext(), "Unable to fetch data.", Toast.LENGTH_SHORT).show();
@@ -135,6 +145,12 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTeamList();
     }
 
     @Override
