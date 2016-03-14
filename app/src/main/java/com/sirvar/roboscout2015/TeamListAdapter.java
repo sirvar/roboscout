@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by katyalrikin on 16-03-12.
- */
 public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamViewHolder> {
 
     ArrayList<Team> teams;
@@ -45,7 +42,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
     }
 
     public interface ClickListener {
-        public void teamClicked(View v, int position);
+        void teamClicked(View v, int position);
     }
 
     public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -66,5 +63,6 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
         public void onClick(View v) {
             clickListener.teamClicked(v, getAdapterPosition());
         }
+
     }
 }

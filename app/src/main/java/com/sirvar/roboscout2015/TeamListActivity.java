@@ -1,12 +1,14 @@
 package com.sirvar.roboscout2015;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -162,6 +164,33 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         Bundle teamInfo = new Bundle();
         teamInfo.putParcelable("team", teams.get(position));
         startActivity(new Intent(getApplicationContext(), ScoutActivity.class).putExtras(teamInfo));
+    }
+
+    public void teamLongClicked(View v, final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this team?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        teams.remove(position);
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
+                        query.whereEqualTo("objectId", teams.get(position).getuID()).findInBackground(new FindCallback<ParseObject>() {
+                            @Override
+                            public void done(List<ParseObject> list, ParseException e) {
+                                for (ParseObject po : list) {
+                                    po.deleteEventually();
+                                }
+
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        // Create the AlertDialog object
+        builder.create();
     }
 
     /**
