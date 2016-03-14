@@ -1,6 +1,7 @@
 package com.sirvar.roboscout2015;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +44,10 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
 
     public interface ClickListener {
         void teamClicked(View v, int position);
+        void teamLongClicked(View v, int position);
     }
 
-    public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView teamNumber;
         TextView region;
@@ -57,6 +59,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
             region = (TextView) itemView.findViewById(R.id.region);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -64,5 +67,10 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.TeamVi
             clickListener.teamClicked(v, getAdapterPosition());
         }
 
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.teamLongClicked(v, getAdapterPosition());
+            return true;
+        }
     }
 }

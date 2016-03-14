@@ -166,11 +166,13 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
         startActivity(new Intent(getApplicationContext(), ScoutActivity.class).putExtras(teamInfo));
     }
 
+    @Override
     public void teamLongClicked(View v, final int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to delete this team?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        new AlertDialog.Builder(TeamListActivity.this, R.style.AppCompatAlertDialogStyle)
+                .setMessage("Are you sure you want to delete this team?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
                         teams.remove(position);
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
                         query.whereEqualTo("objectId", teams.get(position).getuID()).findInBackground(new FindCallback<ParseObject>() {
@@ -184,13 +186,13 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                         });
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                });
-        // Create the AlertDialog object
-        builder.create();
+                })
+                .setCancelable(false)
+                .show();
     }
 
     /**
