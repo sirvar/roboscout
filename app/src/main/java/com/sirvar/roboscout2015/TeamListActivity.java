@@ -134,6 +134,12 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        updateTeamList();
+    }
+
+    @Override
     public void teamClicked(View v, int position) {
         // Attach Parcelable to edit team
         Bundle teamInfo = new Bundle();
@@ -173,7 +179,6 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
 
     public void localTeamList() {
         // Query backend
-        Log.v("backend", "yup");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
         query.fromLocalDatastore().findInBackground(new FindCallback<ParseObject>() {
             @Override
