@@ -2,9 +2,9 @@ package com.sirvar.roboscout2015;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.parse.Parse;
 
@@ -15,7 +15,7 @@ public class RedirectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scout);
+        setContentView(R.layout.activity_redirect);
 
         try {
             Parse.enableLocalDatastore(this);
@@ -31,7 +31,7 @@ public class RedirectActivity extends AppCompatActivity {
         if (sessionManager.isLoggedIn()) {
             // Open main screen
             activity = TeamListActivity.class;
-            Toast.makeText(getApplicationContext(), "Welcome back Team " + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM), Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.main_content), "Welcome back Team " + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM), Snackbar.LENGTH_SHORT).show();
         } else {
             // Open login screen
             activity = LoginActivity.class;

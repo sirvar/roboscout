@@ -72,6 +72,7 @@ public class InfoFragment extends Fragment {
         return view;
     }
 
+    // Getter methods
     public String getTeamNumber() {
         return teamNumber.getText().toString();
     }

@@ -1,7 +1,11 @@
 package com.sirvar.roboscout2015;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -48,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Check if passwords match
                 if (password.getText().toString().equals(passwordAgain.getText().toString())) {
-                    signup(teamNumber.getText().toString(), email.getText().toString(), password.getText().toString());
+                    signup(teamNumber.getText().toString(), email.getText().toString(), password.getText().toString(), v);
                 } else {
                     Toast.makeText(getApplicationContext(), "Passwords don't match. Try again.", Toast.LENGTH_SHORT).show();
                     password.setText("");
@@ -75,10 +79,15 @@ public class SignupActivity extends AppCompatActivity {
      * @param email      the email of the user
      * @param pass       the password of the user account
      */
-    public void signup(final String teamNumber, final String email, String pass) {
+    public void signup(final String teamNumber, final String email, String pass, final View view) {
+        if (!isNetworkAvailable()) {
+            Snackbar.make(view, "Unable to connect to the Internet. Try again.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
         // Make sure all fields are filled in
         if (teamNumber.equals("") || email.equals("") || pass.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "Please fill in all fields.", Snackbar.LENGTH_SHORT).show();
             return;
         }
 
@@ -94,12 +103,12 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 // Signup was successful, no exception
                 if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Successfully signed up.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Successfully signed up.", Snackbar.LENGTH_SHORT).show();
                     sessionManager.createLoginSession(teamNumber, email);
-//                    startActivity(new Intent(getApplicationContext(), MAIN));
+                    startActivity(new Intent(getApplicationContext(), TeamListActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Unable signed up. Please try again.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Unable signed up. Please try again.", Snackbar.LENGTH_SHORT).show();
                     password.setText("");
                     passwordAgain.setText("");
                 }
@@ -107,5 +116,17 @@ public class SignupActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Checks if the device is connected to the Internet
+     *
+     * @return connection state
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 
 }

@@ -1,13 +1,16 @@
 package com.sirvar.roboscout2015;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -42,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login(email.getText().toString(), password.getText().toString());
+                login(email.getText().toString(), password.getText().toString(), v);
             }
         });
 
@@ -63,10 +66,15 @@ public class LoginActivity extends AppCompatActivity {
      * @param email email of user
      * @param pass  password of user
      */
-    public void login(final String email, final String pass) {
+    public void login(final String email, final String pass, final View view) {
+        if (!isNetworkAvailable()) {
+            Snackbar.make(view, "Unable to connect to the Internet. Try again.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
         // Make sure all fields are filled in
         if (email.equals("") || pass.equals("")) {
-            Toast.makeText(getApplicationContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "Please fill in all fields.", Snackbar.LENGTH_SHORT).show();
             return;
         }
 
@@ -75,17 +83,28 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
-                    Toast.makeText(getApplicationContext(), "Successfully logged in.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Successfully logged in.", Snackbar.LENGTH_SHORT).show();
                     sessionManager.createLoginSession(parseUser.getString("Team"), email);
                     startActivity(new Intent(getApplicationContext(), TeamListActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Unable to login.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Unable to login.", Snackbar.LENGTH_SHORT).show();
                     password.setText("");
                 }
             }
         });
 
+    }
+
+    /**
+     * Checks if the device is connected to the Internet
+     *
+     * @return connection state
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

@@ -13,11 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -27,7 +25,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -201,6 +198,7 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
 
     /**
      * Checks if the device is connected to the Internet
+     *
      * @return connection state
      */
     private boolean isNetworkAvailable() {
