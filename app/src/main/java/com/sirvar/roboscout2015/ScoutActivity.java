@@ -1,5 +1,8 @@
 package com.sirvar.roboscout2015;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -16,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.SaveCallback;
 
 public class ScoutActivity extends AppCompatActivity {
 
@@ -124,8 +129,17 @@ public class ScoutActivity extends AppCompatActivity {
         teamParse.put("School", info.getSchool());
         teamParse.put("TeamName", info.getTeamName());
 
-        teamParse.saveEventually();
-        finish();
+        if (isNetworkAvailable()) {
+            teamParse.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    finish();
+                }
+            });
+        } else {
+            teamParse.saveEventually();
+            finish();
+        }
 
     }
 
@@ -228,5 +242,17 @@ public class ScoutActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    /**
+     * Checks if the device is connected to the Internet
+     *
+     * @return connection state
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

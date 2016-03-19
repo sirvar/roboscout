@@ -31,7 +31,6 @@ public class RedirectActivity extends AppCompatActivity {
         if (sessionManager.isLoggedIn()) {
             // Open main screen
             activity = TeamListActivity.class;
-            Snackbar.make(findViewById(R.id.main_content), "Welcome back Team " + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM), Snackbar.LENGTH_SHORT).show();
         } else {
             // Open login screen
             activity = LoginActivity.class;

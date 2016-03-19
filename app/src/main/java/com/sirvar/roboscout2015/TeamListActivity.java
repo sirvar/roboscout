@@ -13,9 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -152,13 +154,13 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("T" + teamNumber);
-                        query.whereEqualTo("objectId", teams.get(position).getuID()).findInBackground(new FindCallback<ParseObject>() {
+                        query.fromLocalDatastore().whereEqualTo("objectId", teams.get(position).getuID()).findInBackground(new FindCallback<ParseObject>() {
                             @Override
                             public void done(List<ParseObject> list, ParseException e) {
+                                // No exception, query successful
                                 for (ParseObject po : list) {
                                     po.deleteEventually();
                                 }
-
                             }
                         });
                         teams.remove(position);
@@ -181,8 +183,8 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 // No exception, query successful
-                teams.clear();
                 if (e == null) {
+                    teams.clear();
                     Collections.reverse(list);
                     for (ParseObject object : list) {
                         if (object.getString("Team").equals("")) continue;
