@@ -19,7 +19,7 @@ public class RedirectActivity extends AppCompatActivity {
 
         try {
             Parse.enableLocalDatastore(this);
-            Parse.initialize(this, "ALp8bFYR7LdRfH4Wba6Uz5klQte4dOcsMqGBugH5", "PV2POubfxe04VaRgLRF1S0WKQB2Se6LSdPMce2cL");
+            Parse.initialize(this, "hL3tRVlLb2ru2fc3CEVkzWKNyXnR2eBuprD1eTTC", "Bp10SKAGT7Q2CK60qeHiLeH5dGqqTQobezET46GF");
         } catch (RuntimeException re) {
             Log.v("Parse", "Unable to initialize");
         }

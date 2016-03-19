@@ -1,50 +1,87 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sirvar.roboscout2015.InfoFragment">
 
 
-    <EditText
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:maxLength="4"
-        android:hint="Team Number"
-        android:id="@+id/teamNumber" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapWords|text"
-        android:ems="10"
-        android:id="@+id/region"
-        android:hint="Region"
-        android:layout_below="@+id/teamNumber" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapWords|text"
-        android:ems="10"
-        android:id="@+id/school"
-        android:hint="School"
-        android:layout_below="@+id/region" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapWords|text"
-        android:ems="10"
-        android:id="@+id/teamName"
-        android:hint="Team Name"
-        android:layout_below="@+id/school" />
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.sirvar.roboscout2015.InfoFragment">
 
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:maxLength="4"
+            android:hint="Team Number"
+            android:id="@+id/teamNumber" />
 
-</RelativeLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|text"
+            android:ems="10"
+            android:id="@+id/region"
+            android:hint="Region"
+            android:layout_below="@+id/teamNumber" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|text"
+            android:ems="10"
+            android:id="@+id/school"
+            android:hint="School"
+            android:layout_below="@+id/region" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|text"
+            android:ems="10"
+            android:id="@+id/teamName"
+            android:hint="Team Name"
+            android:layout_below="@+id/school" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/robotType"
+            android:layout_below="@id/teamName">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Defensive"
+                android:id="@+id/defensive" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shooting"
+                android:id="@+id/shooting" />
+
+        </RadioGroup>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/mainStrategy"
+            android:hint="Main Strategy"
+            android:layout_below="@+id/robotType" />
+
+    </RelativeLayout>
+
+
+</ScrollView>
