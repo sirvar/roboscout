@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeleopFragment extends Fragment {
+public class AutoFragment extends Fragment {
 
 
-    public TeleopFragment() {
+    public AutoFragment() {
         // Required empty public constructor
     }
 
@@ -23,9 +23,7 @@ public class TeleopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_teleop, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_auto, container, false);
     }
 
 }

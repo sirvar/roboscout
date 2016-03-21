@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,20 +16,20 @@ public class Team implements Parcelable {
             return new Team[size];
         }
     };
-    private String teamNumber;
-    private String region;
-    private String school;
-    private String teamName;
-    private String robotType;
-    private String mainStratedgy;
-    private String sponsors;
-    private String programmingDivision;
-    private String mechaincalDivision;
-    private String electricalDivision;
-    private String mediaDivision;
-    private String workWellWithUs;
-    private String otherInfo;
-    private String uID;
+    private String teamNumber = "";
+    private String region = "";
+    private String school = "";
+    private String teamName = "";
+    private String robotType = "";
+    private String mainStrategy = "";
+    private String sponsors = "";
+    private String programmingDivision = "";
+    private String mechanicalDivision = "";
+    private String electricalDivision = "";
+    private String mediaDivision = "";
+    private String workWellWithUs = "";
+    private String otherInfo = "";
+    private String uID = "";
 
     public Team() {
 
@@ -96,12 +96,12 @@ public class Team implements Parcelable {
         this.robotType = robotType;
     }
 
-    public String getMainStratedgy() {
-        return mainStratedgy;
+    public String getMainStrategy() {
+        return mainStrategy;
     }
 
-    public void setMainStratedgy(String mainStratedgy) {
-        this.mainStratedgy = mainStratedgy;
+    public void setMainStrategy(String mainStrategy) {
+        this.mainStrategy = mainStrategy;
     }
 
     public String getSponsors() {
@@ -120,12 +120,12 @@ public class Team implements Parcelable {
         this.programmingDivision = programmingDivision;
     }
 
-    public String getMechaincalDivision() {
-        return mechaincalDivision;
+    public String getMechanicalDivision() {
+        return mechanicalDivision;
     }
 
-    public void setMechaincalDivision(String mechaincalDivision) {
-        this.mechaincalDivision = mechaincalDivision;
+    public void setMechanicalDivision(String mechanicalDivision) {
+        this.mechanicalDivision = mechanicalDivision;
     }
 
     public String getElectricalDivision() {

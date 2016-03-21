@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AutoFragment extends Fragment {
+public class DrivingFragment extends Fragment {
 
 
-    public AutoFragment() {
+    public DrivingFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,9 @@ public class AutoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_auto, container, false);
+        View view = inflater.inflate(R.layout.fragment_driving, container, false);
+
+        return view;
     }
 
 }

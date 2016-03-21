@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -124,10 +124,17 @@ public class ScoutActivity extends AppCompatActivity {
             teamParse = ParseObject.createWithoutData("T" + sessionManager.getUserDetails().get(SessionManager.KEY_TEAM), team.getuID());
         }
 
-        teamParse.put("Team", info.getTeamNumber());
-        teamParse.put("Region", info.getRegion());
-        teamParse.put("School", info.getSchool());
-        teamParse.put("TeamName", info.getTeamName());
+        teamParse.put("team", info.getTeamNumber());
+        teamParse.put("region", info.getRegion());
+        teamParse.put("school", info.getSchool());
+        teamParse.put("teamName", info.getTeamName());
+        teamParse.put("strategy", info.getStrategy());
+
+        if (info.getShooting().isChecked()) {
+            teamParse.put("robotType", "Shooting");
+        } else if (info.getDefensive().isChecked()) {
+            teamParse.put("robotType", "Defensive");
+        }
 
         if (isNetworkAvailable()) {
             teamParse.saveInBackground(new SaveCallback() {

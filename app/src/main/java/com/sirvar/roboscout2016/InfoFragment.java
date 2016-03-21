@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 
 /**
@@ -21,6 +22,10 @@ public class InfoFragment extends Fragment {
     private EditText region;
     private EditText school;
     private EditText teamName;
+    private EditText strategy;
+
+    private RadioButton defensive;
+    private RadioButton shooting;
 
     private Team team;
 
@@ -41,11 +46,22 @@ public class InfoFragment extends Fragment {
         region = (EditText) view.findViewById(R.id.region);
         school = (EditText) view.findViewById(R.id.school);
         teamName = (EditText) view.findViewById(R.id.teamName);
+        strategy = (EditText) view.findViewById(R.id.strategy);
+
+        defensive = (RadioButton) view.findViewById(R.id.defensive);
+        shooting = (RadioButton) view.findViewById(R.id.shooting);
 
         teamNumber.setText(team.getTeamNumber());
         region.setText(team.getRegion());
         school.setText(team.getSchool());
         teamName.setText(team.getTeamName());
+        strategy.setText(team.getMainStrategy());
+
+        if (team.getRobotType().equals("DEFENSIVE")) {
+            defensive.setChecked(true);
+        } else if (team.getRobotType().equals("SHOOTING")) {
+            shooting.setChecked(true);
+        }
 
         // Add team number to toolbar
         teamNumber.addTextChangedListener(new TextWatcher() {
@@ -87,5 +103,17 @@ public class InfoFragment extends Fragment {
 
     public String getTeamName() {
         return teamName.getText().toString();
+    }
+
+    public String getStrategy() {
+        return strategy.getText().toString();
+    }
+
+    public RadioButton getDefensive() {
+        return defensive;
+    }
+
+    public RadioButton getShooting() {
+        return shooting;
     }
 }

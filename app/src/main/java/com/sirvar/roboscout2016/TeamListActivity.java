@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2015;
+package com.sirvar.roboscout2016;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,11 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
@@ -109,8 +107,8 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                     teams.clear();
                     if (e == null) {
                         for (ParseObject object : list) {
-                            if (object.getString("Team").equals("")) continue;
-                            Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
+                            if (object.getString("team").equals("")) continue;
+                            Team team = new Team(object.getString("team"), object.getString("region"), object.getString("school"), object.getString("teamName"), object.getObjectId());
                             teams.add(team);
                         }
                     } else {
@@ -187,8 +185,8 @@ public class TeamListActivity extends AppCompatActivity implements TeamListAdapt
                     teams.clear();
                     Collections.reverse(list);
                     for (ParseObject object : list) {
-                        if (object.getString("Team").equals("")) continue;
-                        Team team = new Team(object.getString("Team"), object.getString("Region"), object.getString("School"), object.getString("TeamName"), object.getObjectId());
+                        if (object.getString("team").equals("")) continue;
+                        Team team = new Team(object.getString("team"), object.getString("region"), object.getString("school"), object.getString("teamName"), object.getObjectId());
                         teams.add(team);
                     }
                 }
