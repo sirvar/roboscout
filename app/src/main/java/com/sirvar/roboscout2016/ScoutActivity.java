@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -128,25 +129,27 @@ public class ScoutActivity extends AppCompatActivity {
         teamParse.put("region", info.getRegion());
         teamParse.put("school", info.getSchool());
         teamParse.put("teamName", info.getTeamName());
-        teamParse.put("strategy", info.getStrategy());
+//        teamParse.put("strategy", info.getStrategy());
+//
+//        if (info.getShooting().isChecked()) {
+//            teamParse.put("robotType", "Shooting");
+//        } else if (info.getDefensive().isChecked()) {
+//            teamParse.put("robotType", "Defensive");
+//        }
 
-        if (info.getShooting().isChecked()) {
-            teamParse.put("robotType", "Shooting");
-        } else if (info.getDefensive().isChecked()) {
-            teamParse.put("robotType", "Defensive");
-        }
-
-        if (isNetworkAvailable()) {
-            teamParse.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    finish();
-                }
-            });
-        } else {
-            teamParse.saveEventually();
-            finish();
-        }
+//        if (isNetworkAvailable()) {
+//            Log.v("test", "to");
+//            teamParse.saveInBackground(new SaveCallback() {
+//                @Override
+//                public void done(ParseException e) {
+//
+//                }
+//            });
+//        } else {
+//            teamParse.saveEventually();
+//            finish();
+//        }
+        
 
     }
 
