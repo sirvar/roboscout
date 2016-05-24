@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RoboScout 2015</string>
+    <string name="app_name">RoboScout</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_signup">Signup</string>
     <string name="title_activity_recruit">Scout</string>

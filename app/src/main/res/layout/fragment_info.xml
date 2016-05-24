@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sirvar.roboscout2016.InfoFragment">
+    tools:context="com.sirvar.roboscout.InfoFragment">
 
 
     <RelativeLayout
@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.sirvar.roboscout2016.InfoFragment">
+        tools:context="com.sirvar.roboscout.InfoFragment">
 
 
         <EditText
@@ -57,30 +57,7 @@
             android:id="@+id/robotType"
             android:layout_below="@id/teamName">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shooting"
-                android:checked="true"
-                android:id="@+id/shooting" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Defending"
-                android:id="@+id/defensive" />
-
         </RadioGroup>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="200dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/strategy"
-            android:hint="Main Strategy"
-            android:layout_below="@+id/robotType" />
 
     </RelativeLayout>
 

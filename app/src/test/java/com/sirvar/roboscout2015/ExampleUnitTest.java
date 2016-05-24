@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2016;
+package com.sirvar.roboscout;
 
 import org.junit.Test;
 

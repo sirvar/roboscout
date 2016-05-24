@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sirvar.roboscout2016">
+    package="com.sirvar.roboscout">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,31 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.sirvar.roboscout2016.RedirectActivity"
+            android:name=".RedirectActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sirvar.roboscout2016.LoginActivity"
+            android:name="com.sirvar.roboscout.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sirvar.roboscout2016.SignupActivity"
+            android:name="com.sirvar.roboscout.SignupActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sirvar.roboscout2016.TeamListActivity"
+            android:name="com.sirvar.roboscout.TeamListActivity"
             android:label="@string/title_activity_team_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sirvar.roboscout2016.ScoutActivity"
+            android:name="com.sirvar.roboscout.ScoutActivity"
             android:label="@string/title_activity_recruit"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

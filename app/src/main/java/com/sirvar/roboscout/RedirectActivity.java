@@ -1,4 +1,4 @@
-package com.sirvar.roboscout2016;
+package com.sirvar.roboscout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ public class RedirectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redirect);
 
+        // Initialize Parse
         try {
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "hL3tRVlLb2ru2fc3CEVkzWKNyXnR2eBuprD1eTTC", "Bp10SKAGT7Q2CK60qeHiLeH5dGqqTQobezET46GF");
