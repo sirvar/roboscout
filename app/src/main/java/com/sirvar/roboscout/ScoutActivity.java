@@ -146,6 +146,18 @@ public class ScoutActivity extends AppCompatActivity {
     }
 
     /**
+     * Checks if the device is connected to the Internet
+     *
+     * @return connection state
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    /**
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
@@ -244,17 +256,5 @@ public class ScoutActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
-
-    /**
-     * Checks if the device is connected to the Internet
-     *
-     * @return connection state
-     */
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

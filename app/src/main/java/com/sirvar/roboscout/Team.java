@@ -16,6 +16,7 @@ public class Team implements Parcelable {
             return new Team[size];
         }
     };
+
     private String teamNumber = "";
     private String region = "";
     private String school = "";
@@ -92,16 +93,15 @@ public class Team implements Parcelable {
     }
 
     // Implementing methods for Parcelable
-
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel destination, int flags) {
         String[] parcel = {teamNumber, region, school, teamName, uID};
-        dest.writeStringArray(parcel);
+        destination.writeStringArray(parcel);
     }
 
 }
